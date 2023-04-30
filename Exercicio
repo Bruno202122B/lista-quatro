@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class App{
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        
+        String nome;
+        int idade;
+        String cartaoVacina;
+        String sintomasRecentes;
+        String contatoSintomasGripais;
+        String retornandoViagem;
+        int porcentagemRisco = 0;
+        int contTentativas = 0;
+        
+        // Coleta de dados
+        System.out.println("Informe o seu nome:");
+        nome = input.nextLine();
+        
+        System.out.println("Informe a sua idade:");
+        idade = input.nextInt();
+        
+        input.nextLine(); // Para consumir a quebra de linha deixada pelo nextInt()
+        
+        do {
+            System.out.println("Seu cartão de vacina está em dia? (SIM/NAO)");
+            cartaoVacina = input.nextLine().toUpperCase();
+            contTentativas++;
+        } while (!cartaoVacina.equals("SIM") && !cartaoVacina.equals("NAO") && contTentativas < 3);
+        
+        contTentativas = 0;
+        
+        do {
+            System.out.println("Teve algum dos sintomas recentemente? (dor de cabeça, febre, náusea, dor articular, gripe) (SIM/NAO)");
+            sintomasRecentes = input.nextLine().toUpperCase();
+            contTentativas++;
+        } while (!sintomasRecentes.equals("SIM") && !sintomasRecentes.equals("NAO") && contTentativas < 3);
+        
+        contTentativas = 0;
+        
+        do {
+            System.out.println("Teve contato com pessoas com sintomas gripais nos últimos dias? (SIM/NAO)");
+            contatoSintomasGripais = input.nextLine().toUpperCase();
+            contTentativas++;
+        } while (!contatoSintomasGripais.equals("SIM") && !contatoSintomasGripais.equals("NAO") && contTentativas < 3);
+        
+        contTentativas = 0;
+        
+        do {
+            System.out.println("Está retornando de viagem realizada no exterior? (SIM/NAO)");
+            retornandoViagem = input.nextLine().toUpperCase();
+            contTentativas++;
+        } while (!retornandoViagem.equals("SIM") && !retornandoViagem.equals("NAO") && contTentativas < 3);
+        
+        // Cálculo da porcentagem de risco
+        if (cartaoVacina.equals("NAO")) {
+            porcentagemRisco += 10;
+        }
+        
+        if (sintomasRecentes.equals("SIM")) {
+            porcentagemRisco += 30;
+        }
+        
+        if (contatoSintomasGripais.equals("SIM")) {
+            porcentagemRisco += 30;
+        }
+        
+        if (retornandoViagem.equals("SIM")) {
+            porcentagemRisco += 30;
+            System.out.println("Você ficará sob observação por 05 dias.");
+        }
+        
+        // Impressão dos dados e orientação final
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+        System.out.println("Cartão Vacinal em Dia: " + cartaoVacina);
+        System.out.println("Teve sintomas recentemente: " + sintomasRecentes);
+        System.out.println("Teve contato com pessoas com sintomas gripais");
+    }
+}
